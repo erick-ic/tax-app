@@ -1,0 +1,85 @@
+/* ====================================================================
+ * 设计 Token — 还原国家税务总局「个人所得税」App 视觉
+ * 设计理念：政务克制 + 精准对齐官方视觉
+ * ==================================================================== */
+
+:root {
+  /* —— 主色：政务深蓝（克制风） —— */
+  --color-primary: #1E5FBF;
+  --color-primary-light: #4F88E6;
+  --color-primary-lighter: #E8F1FC;
+  --color-primary-dark: #154A99;
+
+  /* —— 功能色 —— */
+  --color-warning: #E5333D;        /* 警示红（去申报/未读） */
+  --color-warning-light: #FFEFEF;
+  --color-success: #2BA471;        /* 申报成功/已办 */
+  --color-success-light: #E8F7F0;
+  --color-info: #4F88E6;
+  --color-orange: #FF7A45;         /* Banner / 强调橙 */
+
+  /* —— 中性色 —— */
+  --color-bg: #F5F6F8;             /* 页面背景灰 */
+  --color-card: #FFFFFF;           /* 卡片背景 */
+  --color-divider: #F0F1F3;        /* 分割线 */
+  --color-border: #E5E6EB;         /* 边框 */
+
+  /* —— 文字层级（5 级） —— */
+  --color-text-1: #1A1A1A;         /* 标题、关键金额 */
+  --color-text-2: #4A4A4A;         /* 正文 */
+  --color-text-3: #888888;         /* 辅助文字 */
+  --color-text-4: #B0B0B0;         /* 弱化文字 */
+
+  /* —— 字体尺寸 —— */
+  --font-xs: 11px;
+  --font-sm: 12px;
+  --font-base: 14px;
+  --font-md: 15px;
+  --font-lg: 17px;
+  --font-xl: 20px;
+  --font-xxl: 24px;
+
+  /* —— 圆角 —— */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  /* —— 间距（4 倍数体系） —— */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  /* —— 阴影（克制风） —— */
+  --shadow-card: 0 2px 8px rgba(28, 49, 88, 0.06);
+  --shadow-elevated: 0 4px 16px rgba(28, 49, 88, 0.10);
+
+  /* —— Vant 主题覆盖 —— */
+  --van-primary-color: var(--color-primary);
+  --van-button-primary-background: var(--color-primary);
+  --van-button-primary-border-color: var(--color-primary);
+  --van-nav-bar-background: var(--color-primary);
+  --van-nav-bar-title-text-color: #FFFFFF;
+  --van-nav-bar-icon-color: #FFFFFF;
+  --van-nav-bar-text-color: #FFFFFF;
+  --van-cell-background: #FFFFFF;
+  --van-cell-border-color: var(--color-divider);
+  --van-cell-icon-size: 18px;
+  --van-cell-vertical-padding: 14px;
+  --van-cell-horizontal-padding: 16px;
+  --van-cell-large-title-padding: 16px 16px 8px;
+  --van-cell-large-vertical-padding: 12px;
+  --van-cell-large-horizontal-padding: 16px;
+}
+
+/* 政务蓝主题色块（用于 Banner / 顶部背景） */
+.gradient-primary {
+  background: linear-gradient(135deg, #1E5FBF 0%, #2E72D1 100%);
+}
+.gradient-primary-soft {
+  background: linear-gradient(135deg, #E8F1FC 0%, #F5F9FE 100%);
+}

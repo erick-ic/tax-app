@@ -1,0 +1,74 @@
+/* ====================================================================
+ * 全局样式
+ * ==================================================================== */
+
+body {
+  font-size: var(--font-base);
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 600;
+  color: var(--color-text-1);
+}
+
+p { margin: 0; }
+
+/* —— 公共容器 —— */
+.page {
+  min-height: 100vh;
+  background: var(--color-bg);
+}
+
+.card {
+  background: var(--color-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+/* —— 通用区块标题 —— */
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-4) var(--space-2);
+  font-size: var(--font-md);
+  font-weight: 600;
+  color: var(--color-text-1);
+}
+
+.section-title .more {
+  font-size: var(--font-sm);
+  color: var(--color-text-3);
+  font-weight: normal;
+}
+
+/* —— Van Cell 标题 padding 修正（官方 App 偏紧） —— */
+.van-cell {
+  font-size: var(--font-md);
+}
+.van-cell__title {
+  font-weight: normal;
+}
+
+/* —— 顶部「标准提高啦」小标签 —— */
+.tag-line {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  background: var(--color-warning-light);
+  color: var(--color-warning);
+  font-size: var(--font-xs);
+  border-radius: var(--radius-sm);
+  margin-right: var(--space-2);
+}
+
+/* —— 占位用 ico（v0.1 不引外部资源） —— */
+.icon-emoji {
+  display: inline-block;
+  font-size: 18px;
+  line-height: 1;
+  vertical-align: middle;
+}

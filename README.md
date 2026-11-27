@@ -2,6 +2,13 @@
 
 使用 Vue 3、Vue Router、Vant 4 和 Vite 6 制作的移动端界面练习，包含首页、待办、办&查、消息和我的五个页面。本项目为非官方静态演示，不连接税务系统，也不能办理真实申报业务。
 
+## 在线访问
+
+- **部署地址**：https://erick-ic.github.io/tax-app/
+- **数据管理页**：https://erick-ic.github.io/tax-app/#/admin
+
+> 手机端可使用 Safari / 浏览器打开后「添加到主屏幕」，以接近原生 App 的独立全屏体验预览。
+
 ## 本地运行
 
 建议使用 Node.js 22 和 npm。
@@ -16,9 +23,10 @@ npm run dev
 ```sh
 npm run build
 npm run preview
+npm run deploy:web
 ```
 
-构建输出为 `dist/`，预览默认端口为 8931。路由使用 URL hash，资源路径采用 `./`，可将构建产物部署到静态托管平台。仓库暂未配置自动部署。
+构建输出为 `dist/`，预览默认端口为 8931。路由使用 URL hash，资源路径采用 `./`，执行 `npm run deploy:web` 可直接构建并发布到 GitHub Pages（`gh-pages` 分支）。
 
 ## 项目结构
 

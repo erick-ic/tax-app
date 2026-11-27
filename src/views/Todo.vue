@@ -30,7 +30,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import emptyArt from '../assets/tax/todo-reference.jpg'
+import emptyArt from '../assets/tax/todo-reference.webp'
 
 const completed = ref(false)
 const pendingTab = ref(null)
@@ -50,8 +50,8 @@ function selectTab(value) {
   font-family: "PingFang SC", -apple-system, BlinkMacSystemFont, "Microsoft YaHei", sans-serif;
 }
 .todo-header {
-  height: 34.86cqw;
-  padding: 2.8cqw 3.18cqw 0;
+  height: calc(34.86cqw + env(safe-area-inset-top));
+  padding: calc(2.8cqw + env(safe-area-inset-top)) 3.18cqw 0;
   background: radial-gradient(ellipse at 47% -10%, #879df0, #55a4ed 47%, #2d83f5 100%);
 }
 .todo-heading { display: flex; align-items: center; gap: 3.18cqw; white-space: nowrap; }

@@ -56,14 +56,14 @@
 import { computed, onBeforeUnmount, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { maskedTaxpayerId, profile } from '../state/appStore'
-import profileAvatar from '../assets/tax/profile-avatar.png'
-import profileIconSprite from '../assets/tax/profile-icons.png'
+import profileAvatar from '../assets/tax/profile-avatar.webp'
+import profileIconSprite from '../assets/tax/profile-icons.webp'
 import profileInfoIcon from '../assets/tax/profile-info.svg'
-import menuHeartIcon from '../assets/tax/profile-menu-heart.png'
-import menuShieldIcon from '../assets/tax/profile-menu-shield.png'
-import menuBulbIcon from '../assets/tax/profile-menu-bulb.png'
-import menuHeadsetIcon from '../assets/tax/profile-menu-headset.png'
-import profileHeroBackground from '../assets/tax/profile-hero-bg.png'
+import menuHeartIcon from '../assets/tax/profile-menu-heart.webp'
+import menuShieldIcon from '../assets/tax/profile-menu-shield.webp'
+import menuBulbIcon from '../assets/tax/profile-menu-bulb.webp'
+import menuHeadsetIcon from '../assets/tax/profile-menu-headset.webp'
+import profileHeroBackground from '../assets/tax/profile-hero-bg.webp'
 
 const profileIconSpriteUrl = `url("${profileIconSprite}")`
 const profileHeroBackgroundUrl = `url("${profileHeroBackground}")`
@@ -128,7 +128,7 @@ const menuItems = [
 .sprite-eye { background-position: 100% 0; }
 .profile-hero {
   position: relative;
-  height: 67.2cqw;
+  height: calc(67.2cqw + env(safe-area-inset-top));
   background-color: #1266ef;
   background-image: v-bind(profileHeroBackgroundUrl);
   background-position: center;
@@ -136,7 +136,7 @@ const menuItems = [
   background-repeat: no-repeat;
 }
 .avatar {
-  position: absolute; z-index: 1; top: 10.8cqw; left: 50%; width: 29.8cqw; height: 29.8cqw;
+  position: absolute; z-index: 1; top: calc(10.8cqw + env(safe-area-inset-top)); left: 50%; width: 29.8cqw; height: 29.8cqw;
   transform: translateX(-50%); overflow: hidden; border-radius: 50%;
 }
 .avatar img { display: block; width: 100%; height: 100%; object-fit: contain; }

@@ -219,7 +219,7 @@ const visibleMessages = computed(() => messages.value.filter((item) => {
   z-index: 1;
   min-height: 0;
   box-sizing: border-box;
-  padding: max(4.8cqw, env(safe-area-inset-top)) 3.05cqw 9.5cqw;
+  padding: calc(4.8cqw + env(safe-area-inset-top)) 3.05cqw 9.5cqw;
   background: radial-gradient(ellipse at 56% -20%, #8b9eea 0, #67a9ee 43%, transparent 72%), linear-gradient(112deg, #3d8cef 0%, #278cf5 100%);
 }
 .message-header h1 { margin: 0; color: #fff; font-size: 6.1cqw; font-weight: 600; line-height: 1.4; }

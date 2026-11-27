@@ -18,8 +18,8 @@ import { useRoute } from 'vue-router'
 import { unreadCount } from '../state/messages'
 const route = useRoute()
 const activeKey = computed(() => route.meta.tab || 'home')
-const assets = import.meta.glob('../assets/tax/tab/reference/*.png', { eager: true, query: '?url', import: 'default' })
-function source(name) { return Object.entries(assets).find(([path]) => path.endsWith('/' + name + '.png'))[1] }
+const assets = import.meta.glob('../assets/tax/tab/reference/*.webp', { eager: true, query: '?url', import: 'default' })
+function source(name) { return Object.entries(assets).find(([path]) => path.endsWith('/' + name + '.webp'))[1] }
 const definitions = [
   ['home', '首页'],
   ['todo', '待办'],
@@ -34,22 +34,22 @@ const tabs = definitions.map(([key, label]) => ({ key, label, path: '/' + key, a
 .app-tab-bar {
   position: fixed;
   z-index: 999;
-  bottom: calc(20px + env(safe-area-inset-bottom));
+  bottom: max(12px, calc(env(safe-area-inset-bottom) - 10px));
   left: 50%;
-  width: calc(100% - 32px);
-  height: 63px;
+  width: calc(100% - 34px);
+  height: 60px;
   display: flex;
-  padding: 0 22px;
+  padding: 0 18px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, .48);
-  border-radius: 34px;
+  border: 1px solid rgba(255, 255, 255, .56);
+  border-radius: 30px;
   background:
-    linear-gradient(105deg, rgba(255, 255, 255, .78), rgba(250, 253, 255, .69) 48%, rgba(255, 250, 246, .76));
+    linear-gradient(105deg, rgba(255, 255, 255, .72), rgba(250, 253, 255, .64) 48%, rgba(255, 250, 246, .70));
   box-shadow:
-    0 7px 22px rgba(52, 72, 101, .10),
-    inset 0 1px 1px rgba(255, 255, 255, .82);
-  backdrop-filter: blur(18px) saturate(125%);
-  -webkit-backdrop-filter: blur(18px) saturate(125%);
+    0 8px 24px rgba(52, 72, 101, .12),
+    inset 0 1px 1px rgba(255, 255, 255, .86);
+  backdrop-filter: blur(22px) saturate(155%);
+  -webkit-backdrop-filter: blur(22px) saturate(155%);
   transform: translateX(-50%);
 }
 .tab-item { flex: 1; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 4px; color: #222729; text-decoration: none; -webkit-tap-highlight-color: transparent; }

@@ -49,8 +49,8 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
-import taxReference from '../assets/tax/service-tax-reference.jpg'
-import queryReference from '../assets/tax/service-query-reference.jpg'
+import taxReference from '../assets/tax/service-tax-reference.webp'
+import queryReference from '../assets/tax/service-query-reference.webp'
 
 const router = useRouter()
 
@@ -90,7 +90,7 @@ function iconStyle(item, query) {
 <style scoped>
 .service-page { container-type: inline-size; width: 100%; height: 100dvh; display: flex; flex-direction: column; overflow: hidden; background: #3589f3; font-family: "PingFang SC", -apple-system, BlinkMacSystemFont, "Microsoft YaHei", sans-serif; }
 :global(.app-root:has(.service-page)) { padding-bottom: 0; }
-.service-header { flex: none; display: flex; align-items: center; gap: 3.2cqw; height: 12.47cqw; padding: 0 3.18cqw 1cqw; background: radial-gradient(ellipse at 47% 0,#829fee,#54a3ed 50%,#2981f2); }
+.service-header { flex: none; display: flex; align-items: center; gap: 3.2cqw; height: calc(12.47cqw + env(safe-area-inset-top)); padding: env(safe-area-inset-top) 3.18cqw 1cqw; background: radial-gradient(ellipse at 47% 0,#829fee,#54a3ed 50%,#2981f2); }
 .service-header h1 { margin: 0; color: white; font-size: 6.1cqw; line-height: 1.4; font-weight: 600; white-space: nowrap; }
 .service-header p { margin: 0; color: #b3d6f3; font-size: 3.05cqw; white-space: nowrap; }
 .service-body { flex: 1; min-height: 0; overflow-y: auto; padding: 4.6cqw 3.18cqw calc(105px + env(safe-area-inset-bottom)); border-radius: 5.1cqw 5.1cqw 0 0; background: #f5f6fa; scrollbar-width: none; }
@@ -102,7 +102,7 @@ function iconStyle(item, query) {
 .feature-entry p { position: relative; z-index: 1; margin: 1.3cqw 0 0; font-size: 3.3cqw; line-height: 1.4; }
 .annual { background: #e7effd; color: #28628c; }.annual h3 { color: #1f638c; }.annual p { color: #688eae; }
 .deduction { margin-top: 3.3cqw; background: #fff6e7; color: #ae6a08; }.deduction h3 { color: #a36104; }.deduction p { color: #b7944d; }
-.feature-art { position: absolute; right: 0; bottom: 0; width: 18.57cqw; height: 15.5cqw; background-image: url('../assets/tax/service-tax-reference.jpg'); background-size: 100cqw 216.794cqw; }
+.feature-art { position: absolute; right: 0; bottom: 0; width: 18.57cqw; height: 15.5cqw; background-image: url('../assets/tax/service-tax-reference.webp'); background-size: 100cqw 216.794cqw; }
 .annual-art { background-position: -75cqw -46cqw; }.deduction-art { background-position: -75cqw -68cqw; }
 .tax-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 7.1cqw 1.8cqw; margin-top: 10cqw; }
 .function-card { position: relative; min-width: 0; padding: 4.9cqw 2.1cqw 2.7cqw; color: #202326; }
@@ -113,7 +113,7 @@ function iconStyle(item, query) {
 .function-icon { position: absolute; top: -3.7cqw; left: 2.5cqw; width: 6.9cqw; height: 6.9cqw; background-repeat: no-repeat; background-size: 100cqw 216.794cqw; }
 .new-badge { position: absolute; z-index: 2; top: -6.4cqw; left: 7cqw; padding: 0 1.1cqw; border-radius: 3cqw; background: #ff6145; color: #fff; font-family: Arial,sans-serif; font-size: 2.8cqw; line-height: 4cqw; }
 .warning-entry { position: relative; display: flex; align-items: center; height: 19.6cqw; margin: 0 -3.18cqw; padding-left: 30.5cqw; gap: 2.5cqw; }
-.warning-art { position: absolute; left: 0; bottom: 0; width: 28cqw; height: 19cqw; background: url('../assets/tax/service-tax-reference.jpg') -3.18cqw -155.2cqw / 100cqw 216.794cqw no-repeat; }
+.warning-art { position: absolute; left: 0; bottom: 0; width: 28cqw; height: 19cqw; background: url('../assets/tax/service-tax-reference.webp') -3.18cqw -155.2cqw / 100cqw 216.794cqw no-repeat; }
 .warning-entry strong { font-size: 4.07cqw; font-weight: 600; color: #101214; }.warning-arrow { font-size: 6cqw; color: #aaa; }
 .query-section { margin-top: 4.6cqw; }
 .query-panel { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 2.1cqw 1.8cqw; padding: 3.18cqw; background: #fff; border-radius: 2.3cqw; }

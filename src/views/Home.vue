@@ -1,6 +1,6 @@
 <template>
   <main class="home-page">
-    <header class="search-row">
+    <header class="search-row" :style="{ '--header-bg-opacity': headerBgOpacity }">
       <div class="search-box">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="8"/><path d="m16.5 16.5 5 5"/></svg>
         <span>请输入想搜索的功能/服务</span>
@@ -26,15 +26,16 @@
         </Transition>
       </div>
 
-      <section class="declare-card" aria-label="2025综合所得年度汇算，已于6月30日结束，逾期办理可能会产生滞纳金，请您尽快申报">
-        <img :src="declareImage" class="declare-art" alt="" />
-        <button class="image-hotspot declare-entry" aria-label="进入专题页"></button>
-        <button class="image-hotspot declare-action" aria-label="开始申报"></button>
+      <section class="declare-card" aria-label="2025综合所得年度汇算，已于6月30日结束，您可进入本专题页查看记录或补办年度汇算">
+        <img :src="declareImage" class="declare-art" alt="" fetchpriority="high" decoding="async" />
+        <h3 class="declare-title">2025综合所得年度汇算</h3>
+        <p class="declare-desc">已于6月30日结束，您可进入本专题页查看记录或补办年度汇算</p>
+        <button class="image-hotspot declare-action" type="button" aria-label="进入专题页">进入专题页</button>
       </section>
 
       <h2 class="section-title">重点服务推荐</h2>
       <section class="featured-card" aria-label="专项附加扣除，若符合条件，您可点击下方填报，超1亿人参与">
-        <img :src="featuredImage" class="featured-art" alt="" />
+        <img :src="featuredImage" class="featured-art" alt="" fetchpriority="high" decoding="async" />
         <button class="image-hotspot featured-policy" aria-label="相关政策"></button>
         <button class="image-hotspot featured-action" aria-label="我要填报"></button>
       </section>
@@ -51,7 +52,7 @@
           @keydown.enter.prevent="openService(item)"
           @keydown.space.prevent="openService(item)"
         >
-          <div class="svc-icon"><img :src="item.icon" alt="" /></div>
+          <div class="svc-icon"><img :src="item.icon" alt="" decoding="async" /></div>
           <h3>{{ item.title }}</h3>
           <p>{{ item.desc }}</p>
           <span class="svc-action" :class="`is-${item.tone}`">{{ item.action }}</span>
@@ -67,6 +68,7 @@
               :class="{ 'is-overflowing': bannerIndex > 1 }"
               :style="bannerIndex > 1 ? { top: `${bannerTopOffsets[bannerIndex]}px` } : undefined"
               alt=""
+              decoding="async"
             />
           </div>
         </Transition>
@@ -83,7 +85,7 @@
               <h3>{{ item.title }}</h3>
               <time :datetime="item.date"><span class="clock-icon" aria-hidden="true"></span>{{ item.date }}</time>
             </div>
-            <img class="policy-art" :src="item.image" alt="" />
+            <img class="policy-art" :src="item.image" alt="" loading="lazy" decoding="async" />
           </article>
         </div>
         <button class="policy-more" type="button">
@@ -100,24 +102,30 @@
 import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { homeData } from '../state/appStore'
-import declareImage from '../assets/tax/home-declare-card-small-text.png'
-import featuredImage from '../assets/tax/ChatGPT Image 2026年9月9日 12_07_09 (2).png'
-import annualIcon from '../assets/tax/ChatGPT Image 2026年9月9日 14_19_37.png'
-import incomeIcon from '../assets/tax/ChatGPT Image 2026年9月9日 14_31_30.png'
-import recordIcon from '../assets/tax/ChatGPT Image 2026年9月9日 14_35_15.png'
-import moreIcon from '../assets/tax/ChatGPT Image 2026年9月9日 14_13_13.png'
-import casePassword from '../assets/tax/case-password.png'
-import caseBankCard from '../assets/tax/case-bank-card.png'
-import caseFiling from '../assets/tax/case-filing.png'
-import caseDeduction from '../assets/tax/case-deduction.png'
-import pensionBanner from '../assets/tax/pension-carousel-banner-overflow.png'
-import deductionBanner from '../assets/tax/deduction-carousel-banner-overflow.png'
-import jobDeductionBanner from '../assets/tax/job-deduction-carousel-banner.jpg'
-import taxMemoryBanner from '../assets/tax/tax-memory-carousel-banner.jpg'
-import businessIncomeBanner from '../assets/tax/business-income-carousel-banner-overflow.jpg'
-import taxRecordBanner from '../assets/tax/tax-record-carousel-banner-overflow.jpg'
+import declareImage from '../assets/tax/home-declare-card-official.webp'
+import featuredImage from '../assets/tax/home-featured-card.webp'
+import annualIcon from '../assets/tax/svc-annual.webp'
+import incomeIcon from '../assets/tax/svc-income.webp'
+import recordIcon from '../assets/tax/svc-record.webp'
+import moreIcon from '../assets/tax/svc-more.webp'
+import casePassword from '../assets/tax/case-password.webp'
+import caseBankCard from '../assets/tax/case-bank-card.webp'
+import caseFiling from '../assets/tax/case-filing.webp'
+import caseDeduction from '../assets/tax/case-deduction.webp'
+import pensionBanner from '../assets/tax/pension-carousel-banner-overflow.webp'
+import deductionBanner from '../assets/tax/deduction-carousel-banner-overflow.webp'
+import jobDeductionBanner from '../assets/tax/job-deduction-carousel-banner.webp'
+import taxMemoryBanner from '../assets/tax/tax-memory-carousel-banner.webp'
+import businessIncomeBanner from '../assets/tax/business-income-carousel-banner-overflow.webp'
+import taxRecordBanner from '../assets/tax/tax-record-carousel-banner-overflow.webp'
 
 const router = useRouter()
+const headerBgOpacity = ref(0)
+
+function handleScroll() {
+  const y = window.scrollY || document.documentElement.scrollTop || 0
+  headerBgOpacity.value = Math.min(1, Math.max(0, y / 48))
+}
 const carouselBanners = [jobDeductionBanner, taxMemoryBanner, businessIncomeBanner, pensionBanner, deductionBanner, taxRecordBanner]
 const bannerTopOffsets = [0, 0, -11, -4, -11, -11]
 const bannerLabels = [
@@ -222,7 +230,9 @@ function showNextBanner() {
 onMounted(() => {
   prepareNotice()
   scheduleNextBanner()
+  handleScroll()
   window.addEventListener('resize', handleResize)
+  window.addEventListener('scroll', handleScroll, { passive: true })
 })
 
 onBeforeUnmount(() => {
@@ -230,6 +240,7 @@ onBeforeUnmount(() => {
   window.clearTimeout(resizeTimer)
   window.clearTimeout(bannerTimer)
   window.removeEventListener('resize', handleResize)
+  window.removeEventListener('scroll', handleScroll)
 })
 
 const activePolicy = ref(0)
@@ -255,6 +266,7 @@ const policyArticles = computed(() => (policyContent.value[activePolicy.value] |
   font-synthesis: none;
   position: relative;
   min-height: 100vh;
+  padding-top: calc(56px + env(safe-area-inset-top));
   padding-bottom: 100px;
   background: #f5f6fa;
   overflow: hidden;
@@ -263,19 +275,24 @@ const policyArticles = computed(() => (policyContent.value[activePolicy.value] |
   content: '';
   position: absolute;
   inset: 0 0 auto;
-  height: 180px;
-  background: radial-gradient(ellipse at 48% 0%, #819ff0 0%, #58a5ed 40%, #2c82f3 85%);
-  mask-image: linear-gradient(#000 0%, #000 65%, transparent 100%);
+  height: calc(202px + env(safe-area-inset-top));
+  background: radial-gradient(ellipse 95% 75% at 50% 0%, #5a96f1 0%, #3b88f2 45%, #2a7ff0 88%);
+  mask-image: linear-gradient(#000 0%, #000 72%, transparent 100%);
 }
 .search-row {
-  position: relative;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
   display: flex;
   align-items: center;
   gap: 11px;
-  height: 65px;
-  padding: 13px 13px 18px 12px;
+  height: calc(56px + env(safe-area-inset-top));
+  padding: calc(8px + env(safe-area-inset-top)) 13px 12px 12px;
+  background: rgba(37, 123, 224, var(--header-bg-opacity, 0));
 }
-.search-box { display: flex; flex: 1; min-width: 0; align-items: center; gap: 8px; height: 34px; padding: 0 12px; border-radius: 9px; background: #c2dfff70; color: #fff; }
+.search-box { display: flex; flex: 1; min-width: 0; align-items: center; gap: 8px; height: 36px; padding: 0 12px; border-radius: 9px; background: rgba(212, 232, 255, .42); color: #fff; }
 .search-box svg { width: 17px; height: 19px; flex: none; stroke: currentColor; stroke-width: 1.8; fill: none; }
 .search-box span { white-space: nowrap; font-size: var(--type-search); line-height: 1.4; font-weight: 400; letter-spacing: .02em; }
 .scan-btn { border: 0; background: none; padding: 0; color: white; width: 31px; height: 30px; flex: none; }
@@ -291,17 +308,14 @@ const policyArticles = computed(() => (policyContent.value[activePolicy.value] |
 .notice-slide-enter-from { transform: translateY(100%); }
 .notice-slide-leave-to { transform: translateY(-100%); }
 @keyframes notice-marquee { to { transform: translateX(calc(-1 * var(--notice-distance))); } }
-.declare-card { position: relative; margin-top: 11px; width: 100%; aspect-ratio: 369 / 204; overflow: hidden; border-radius: 9px; background: #dceffd; box-shadow: 0 7px 16px #a5c9f52b; }
-/* Crop only the supplied artwork canvas margins using CSS; preserve source files. */
-.declare-art { position: absolute; width: 109.45%; height: calc(159.91% + 6px); max-width: none; left: -4.65%; top: -33.67%; }
-.declare-card { isolation: isolate; }
-/* Subtle screen tint over the baked-in heading and description. */
-.declare-card::after { content: ''; position: absolute; left: 5.5%; right: 5.5%; top: 18%; height: 37%; background: #181818; mix-blend-mode: screen; pointer-events: none; }
-.image-hotspot { position: absolute; border: none; background: transparent; cursor: pointer; border-radius: 24px; }
+.declare-card { position: relative; margin-top: 11px; width: 100%; aspect-ratio: 369 / 204; overflow: hidden; border-radius: 9px; background: #dceffd; box-shadow: 0 7px 16px #a5c9f52b; isolation: isolate; }
+.declare-art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.declare-title { position: absolute; left: 5%; top: 23%; margin: 0; color: #1b2028; font-size: 4.58vw; line-height: 1.25; font-weight: 700; letter-spacing: 0.01em; pointer-events: none; }
+.declare-desc { position: absolute; left: 5%; right: 4%; top: 38.2%; margin: 0; color: #59616d; font-size: 3.55vw; line-height: 1.5; font-weight: 400; letter-spacing: 0.005em; pointer-events: none; }
+.image-hotspot { position: absolute; border: none; background: transparent; cursor: pointer; border-radius: 999px; }
 .image-hotspot:focus-visible { outline: 2px solid #153fbd; outline-offset: -3px; }
-.declare-entry { right: 0; top: 0; width: 31%; height: 19%; }
-.declare-action { left: 5.7%; top: 63%; width: 45%; height: 25%; }
-.section-title { margin: 44px 0 14px; padding: 0; font-size: var(--type-section); line-height: 1.5; font-weight: 600; letter-spacing: .025em; }
+.declare-action { left: 4.8%; top: 66.2%; width: 46.6%; height: 22.8%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 3.72vw; font-weight: 500; letter-spacing: .03em; -webkit-tap-highlight-color: transparent; }
+.section-title { margin: 42px 0 14px; padding: 0; font-size: var(--type-section); line-height: 1.5; font-weight: 600; letter-spacing: .025em; }
 .featured-card { position: relative; width: 100%; aspect-ratio: 369 / 166; overflow: hidden; border-radius: 9px; background: #48a0fa; box-shadow: 0 7px 16px #47a6ec55, 0 0 5px #76d3f477; }
 .featured-art { position: absolute; width: 112.28%; height: 169.54%; max-width: none; left: -6.21%; top: -34.77%; }
 .featured-policy { right: 0; top: 0; width: 32%; height: 26%; }
@@ -319,7 +333,7 @@ const policyArticles = computed(() => (policyContent.value[activePolicy.value] |
 .svc-card p { font-size: var(--type-description); line-height: 1.3; font-weight: 400; letter-spacing: 0; color: #a4a5a7; margin-top: 6px; }
 .svc-action { position: absolute; right: 0; bottom: 0; min-width: 58px; height: 28px; display: grid; place-items: center; padding: 0 10px; border-radius: 15px 0 12px; font-size: 12px; line-height: 1; white-space: nowrap; }
 .svc-action.is-blue { color: #398fea; background: #d9efff; }.svc-action.is-purple { color: #8d4ce8; background: #eee0ff; }.svc-action.is-mint { color: #16bfa7; background: #d6fbf4; }
-.pension-banner { position: relative; height: 96px; margin-top: 26px; overflow: visible; border-radius: 10px; color: #fff; background: #ff8b32; box-shadow: inset 0 1px 0 #ffd39688; }
+.pension-banner { position: relative; height: 96px; margin-top: 24px; overflow: visible; border-radius: 10px; color: #fff; background: #ff8b32; box-shadow: inset 0 1px 0 #ffd39688; }
 .banner-slide { position: absolute; inset: 0; clip-path: inset(-12px 0 -3px round 10px); }
 .pension-banner-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .pension-banner-image.is-overflowing { bottom: auto; height: auto; object-fit: initial; }
@@ -329,7 +343,7 @@ const policyArticles = computed(() => (policyContent.value[activePolicy.value] |
 .pension-indicators { position: absolute; z-index: 3; left: 50%; bottom: 3px; width: 75px; height: 3px; overflow: hidden; border-radius: 3px; background: rgba(255, 236, 218, .68); transform: translateX(-50%); }
 .pension-indicators i { display: block; width: 12.5px; height: 100%; border-radius: 3px; background: #fff; transition: transform .42s cubic-bezier(.25, .75, .35, 1); }
 .policy-section { position: relative; isolation: isolate; margin-top: 17px; }
-.policy-section::before { content: ''; position: absolute; z-index: -1; left: -13px; right: -13px; bottom: -182px; height: 226px; pointer-events: none; background: url('../assets/tax/home-bottom-city-cropped.png') center bottom / 100% 226px no-repeat; }
+.policy-section::before { content: ''; position: absolute; z-index: -1; left: -13px; right: -13px; bottom: -182px; height: 226px; pointer-events: none; background: url('../assets/tax/home-bottom-city-cropped.webp') center bottom / 100% 226px no-repeat; }
 .policy-tabs { display: flex; align-items: flex-end; gap: 0; background: transparent; }
 .policy-tabs button { position: relative; flex: 1; border: 0; background: none; padding: 3px 0 13px; color: #4d4f53; font-size: 15px; line-height: 20px; white-space: nowrap; }
 .policy-tabs .active { color: #087fee; font-weight: 700; }.policy-tabs .active::after { content: ''; position: absolute; left: 20%; width: 29px; bottom: 9px; height: 2px; border-radius: 2px; background: #f2463d; box-shadow: 8px 3px 0 -0.5px #1688f2; }
